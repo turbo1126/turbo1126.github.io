@@ -163,9 +163,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>
@@ -207,6 +211,178 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lbj.jpg">
+      <meta itemprop="name" content="Xiaohan Deng">
+      <meta itemprop="description" content="人不风流枉少年">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="邓小涵的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/11/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">算法学习</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-11-14 00:59:09 / 修改时间：01:02:35" itemprop="dateCreated datePublished" datetime="2021-11-14T00:59:09+08:00">2021-11-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <pre><code>                 蓝桥杯算法学习打卡
+</code></pre>
+<p><strong>算法中的位运算</strong></p>
+<h3 id="1-找出数组中唯一成对的那个数"><a href="#1-找出数组中唯一成对的那个数" class="headerlink" title="1.找出数组中唯一成对的那个数"></a>1.找出数组中唯一成对的那个数</h3><h3 id="2-二进制中1的个数"><a href="#2-二进制中1的个数" class="headerlink" title="2.二进制中1的个数"></a>2.二进制中1的个数</h3><h3 id="3-一条语句判断整数是不是2的整数次方"><a href="#3-一条语句判断整数是不是2的整数次方" class="headerlink" title="3.一条语句判断整数是不是2的整数次方"></a>3.一条语句判断整数是不是2的整数次方</h3><h3 id="4-将整数的奇偶位互换"><a href="#4-将整数的奇偶位互换" class="headerlink" title="4.将整数的奇偶位互换"></a>4.将整数的奇偶位互换</h3><h3 id="5-二进制表示浮点实数"><a href="#5-二进制表示浮点实数" class="headerlink" title="5.二进制表示浮点实数"></a>5.二进制表示浮点实数</h3><hr>
+<h2 id="1-找出数组中唯一成对的那个数-1"><a href="#1-找出数组中唯一成对的那个数-1" class="headerlink" title="1.找出数组中唯一成对的那个数"></a>1.找出数组中唯一成对的那个数</h2><p>题目描述：<img src="https://img-blog.csdnimg.cn/20210513165638998.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjA0NDkwMQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>分析</strong>：</p>
+<pre><code class="python">异或运算中，存在以下规则
+x^x=0
+x^0=x
+自反性：A^A^B=0^B=B #连续和同一个因子异或，结果为自己
+</code></pre>
+<p>1001个数中有999个数只出现了一次，有1个数出现了两次，此题我们可以采用异或的知识<br><strong>实现</strong>：</p>
+<pre><code class="python">import random
+N=1001
+x=0
+index=1
+my_list=[int(i) for i in range(1,1001)] #生成一个列表，包含1-1000
+n=random.randint(1,N)                   #随机生成一个1-1000的数，加入列表
+my_list.append(n)
+for i in range(1,N):   #先用x=0去异或1-1000
+    x=x^index
+    index+=1
+for i in my_list:      #再用x去异或列表的每个元素（1-1000和那个重复的数）
+    x=x^i
+#经过上述步骤列表中唯一的数被异或了两次结果为0，而唯二的数被异或了三次x^x^x=x
+
+#print(my_list)    输出列表，可查看x的值等于列表末尾的元素
+print(x)
+</code></pre>
+<hr>
+<h2 id="2-二进制中1的个数-1"><a href="#2-二进制中1的个数-1" class="headerlink" title="2.二进制中1的个数"></a>2.二进制中1的个数</h2><p><strong>题目描述：</strong><br><img src="https://img-blog.csdnimg.cn/20210513172730447.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjA0NDkwMQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>分析：</strong></p>
+<pre><code class="python">以9来说
+ 1 0 0 1
+-      1
+----------
+ 1 0 0 0
+(1001)&amp;(1000)=1000  
+
+ 1 0 0 0
+ -     1
+ ----------
+ 0 1 1 1
+ (1000)&amp;(0111)=0000
+ #每次操作 n&amp;(n-1) 的意义为消去二进制表示中最低位的一个1
+ #直到结果为0，二进制中的1则全部消去
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="python">n=int(input())
+i=0
+while n!=0:
+    n=(n-1)&amp;n
+    i+=1
+print(i)
+
+#常规方法2
+#10进制转2进制 bin()   10进制转8进制 oct()   10进制转16进制 hex()
+m=int(input())
+s=bin(m)
+print(s)
+print(s[2:].count(&quot;1&quot;))
+</code></pre>
+<hr>
+<h2 id="3-一条语句判断整数是不是2的整数次方-1"><a href="#3-一条语句判断整数是不是2的整数次方-1" class="headerlink" title="3.一条语句判断整数是不是2的整数次方"></a>3.一条语句判断整数是不是2的整数次方</h2><p><strong>题目描述：</strong><br>输入一个数，判断是不是2的整数次方</p>
+<p><strong>分析：</strong></p>
+<pre><code class="python">2的整数次方，例如0，2，4，8，16，32，64等
+这些数的共同点就是他们的二进制表示中仅有一位是1，其他位全为0
+此题可借用上题的方法
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="python">n=int(input())
+if n&amp;(n-1)==0:
+    print(&quot;yes&quot;)
+else:
+    print(&quot;no&quot;)
+</code></pre>
+<hr>
+<h2 id="4-将整数二进制表示的奇偶位互换"><a href="#4-将整数二进制表示的奇偶位互换" class="headerlink" title="4.将整数二进制表示的奇偶位互换"></a>4.将整数二进制表示的奇偶位互换</h2><p><strong>分析：</strong><br><img src="https://img-blog.csdnimg.cn/20210513182135970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjA0NDkwMQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>代码：</strong></p>
+<pre><code class="python">n=int(input())
+ou=n&amp;int(&#39;10101010&#39;,2)
+ji=n&amp;int(&#39;01010101&#39;,2)
+print((ou&gt;&gt;1)^(ji&lt;&lt;1))
+</code></pre>
+<hr>
+<h2 id="5-二进制表示浮点实数-1"><a href="#5-二进制表示浮点实数-1" class="headerlink" title="5.二进制表示浮点实数"></a>5.二进制表示浮点实数</h2><p><strong>题目：</strong><br><img src="https://img-blog.csdnimg.cn/20210513183437671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjA0NDkwMQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>分析：</strong></p>
+<pre><code class="python">此题是一个定式
+拿0.625举例，配合着代码理解
+0.625*2  =1.25   1.25大于1 在s后面接上1 返回1.25-1=0.25
+0.25*2   =0.5    0.5小于1  在s后面接上0 返回0.5
+0.5*2    =1      1等于0    在s后面接上1 返回1-1=0
+结束
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="python">s=&quot;0.&quot;
+#输入小于1的小数
+n=float(input())
+while n&gt;0:
+    r=n*2
+    if r&gt;=1:
+        s+=&quot;1&quot;
+        n=r-1
+    else:
+        s+=&quot;0&quot;
+        n=r
+   # if len(s)&gt;34:
+   #    print(&quot;error&quot;)
+print(s)
+</code></pre>
+<p>==注：文中题目及思路均来自蓝桥算法课，本文只是整理吸收，侵删==</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
